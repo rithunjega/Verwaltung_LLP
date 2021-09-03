@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.Scene?>
+<?import javafx.stage.Stage?>
+
+
+<Stage fx:id="stage" title="Notenverwaltung" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainController">
+    <scene>
+        <Scene>
+            <AnchorPane prefHeight="535.0" prefWidth="1047.0">
+                <children>
+                    <Label layoutX="30.0" layoutY="64.0" prefHeight="45.0" prefWidth="246.0" text="LLP-Verwaltung">
+                        <font>
+                            <Font size="30.0" />
+                        </font>
+                    </Label>
+                    <TableView fx:id="tableview" layoutX="30.0" layoutY="109.0" prefHeight="353.0" prefWidth="637.0">
+                        <columns>
+                            <TableColumn fx:id="modulname"  prefWidth="246.0" text="Modulname" />
+                            <TableColumn fx:id="mt"  prefWidth="83.0" text="Mastery" />
+                            <TableColumn fx:id="atl"  prefWidth="78.0" text="ATL" />
+                            <TableColumn fx:id="praesenz" prefWidth="117.0" text="Präsenzpunkte" />
+                            <TableColumn fx:id="prozent" prefWidth="112.0" text="Prozent" />
+                        </columns>
+                    </TableView>
+                    <TextField fx:id="input_Modulname" layoutX="706.0" layoutY="127.0" prefHeight="35.0" prefWidth="284.0" />
+                    <TextField fx:id="input_MT" layoutX="706.0" layoutY="193.0" prefHeight="35.0" prefWidth="284.0" promptText="Mastery" />
+                    <TextField fx:id="input_ATL" layoutX="706.0" layoutY="236.0" prefHeight="35.0" prefWidth="284.0" promptText="ATL" />
+                    <TextField fx:id="input_Praesenz" layoutX="706.0" layoutY="278.0" prefHeight="35.0" prefWidth="284.0" promptText="Präsenz" />
+                    <TextField fx:id="input_ErreichbarLLP" layoutX="706.0" layoutY="356.0" prefHeight="35.0" prefWidth="284.0" />
+                    <Button layoutX="706.0" layoutY="401.0" mnemonicParsing="false"  prefHeight="25.0" prefWidth="284.0" text="hinzufügen" />
+                    <Button layoutX="706.0" layoutY="433.0" mnemonicParsing="false"  prefHeight="25.0" prefWidth="284.0" text="löschen" />
+                    <Label layoutX="706.0" layoutY="176.0" prefHeight="17.0" prefWidth="270.0" text="Bitte erreichte Anzahl LLP mit Komma eingeben" />
+                    <Label fx:id="lbl_warning" layoutX="706.0" layoutY="67.0" prefHeight="17.0" prefWidth="284.0">
+                        <font>
+                            <Font name="System Bold Italic" size="14.0" />
+                        </font></Label>
+                    <Label layoutX="706.0" layoutY="339.0" text="erreichbare LLP: *" />
+                    <Label layoutX="706.0" layoutY="110.0" prefHeight="17.0" prefWidth="106.0" text="Modulname: *" />
+                </children>
+            </AnchorPane>
+        </Scene>
+    </scene>
+</Stage>

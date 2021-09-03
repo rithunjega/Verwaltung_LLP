@@ -3,5 +3,5 @@ module Verwaltung.LLP {
     requires javafx.controls;
     requires javafx.fxml;
 
-    opens sample;
+    opens application;
 }

@@ -3,9 +3,10 @@
 // (powered by FernFlower decompiler)
 //
 
-package sample;
+package application;
 
-public class Controller {
-    public Controller() {
+public class MainController {
+
+    public MainController() {
     }
 }
