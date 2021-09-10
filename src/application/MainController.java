@@ -82,30 +82,44 @@ public class MainController {
 
         noteModel.setProzentObj(prozent);
         noteModel.getProzentObj().setVonLLP(Integer.parseInt(this.input_ErreichbarLLP.getText()));
-        this.calcProzent(noteModel);
-        this.tableview.getItems().add(noteModel);
-        this.input_Modulname.clear();
-        this.input_MT.clear();
-        this.input_ATL.clear();
-        this.input_Praesenz.clear();
-        this.input_ErreichbarLLP.clear();
+
+        calcProzent(noteModel);
+
+        tableview.getItems().add(noteModel);
+        input_Modulname.clear();
+        input_MT.clear();
+        input_ATL.clear();
+        input_Praesenz.clear();
+        input_ErreichbarLLP.clear();
     }
 
     private void calcProzent(NoteModel notenEntry) {
+
         int int_totalMT = Integer.parseInt(Parser.parse(notenEntry.getMt()));
         int int_totalATL = Integer.parseInt(Parser.parse(notenEntry.getAtl()));
         int int_totalPraesenz = Integer.parseInt(Parser.parse(notenEntry.getPraesenz()));
+
         notenEntry.getProzentObj().setErreichtLLP(int_totalMT + int_totalATL + int_totalPraesenz);
+
         int erreichtProzent = notenEntry.getProzentObj().getErreichtLLP() * 100 / notenEntry.getProzentObj().getVonLLP();
         System.out.println(erreichtProzent);
 
         notenEntry.setProzent(notenEntry.getProzentObj().getErreichtLLP() * 100 / notenEntry.getProzentObj().getVonLLP() + "%");
-        this.noten.addEntry(notenEntry);
-        this.tableview.refresh();
+
+        noten.addEntry(notenEntry);
+        tableview.refresh();
     }
 
     @FXML
     private void onDelete(ActionEvent event) {
+        for (int i = 0; i < noten.getEntries().size(); i++) {
+            String modulname = noten.getEntries().get(i).getModulname();
+            if (tableview.getSelectionModel().getSelectedItem().getModulname().toString().equals(modulname)) {
+                noten.removeEntry(noten.getEntries().get(i));
+            }
+        }
+
+        tableview.getItems().removeAll(tableview.getSelectionModel().getSelectedItems());
     }
 
     public void initialize(URL url, ResourceBundle rb) {
