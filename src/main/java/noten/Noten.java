@@ -1,4 +1,4 @@
-package Noten;
+package noten;
 
 import java.util.ArrayList;
 

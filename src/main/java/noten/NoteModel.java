@@ -1,4 +1,6 @@
-package Noten;
+package noten;
+
+import prozent.Prozent;
 
 public class NoteModel {
     private String modulname;
@@ -6,6 +8,7 @@ public class NoteModel {
     private String atl;
     private String praesenz;
     private String prozent;
+    private Prozent prozentObj;
 
     public NoteModel(String modulname, String mt, String atl, String praesenz, String prozent) {
         this.modulname = modulname;
@@ -13,6 +16,7 @@ public class NoteModel {
         this.atl = atl;
         this.praesenz = praesenz;
         this.prozent = prozent;
+        this.prozentObj = prozentObj;
     }
 
     public NoteModel() {
@@ -56,6 +60,12 @@ public class NoteModel {
 
     public void setProzent(String string) {
         this.prozent = string;
+    }
+
+    public Prozent getProzentObj() { return prozentObj; }
+
+    public void setProzentObj(Prozent prozentObj) {
+        this.prozentObj = prozentObj;
     }
 
 }
