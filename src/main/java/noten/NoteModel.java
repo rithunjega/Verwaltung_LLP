@@ -2,12 +2,32 @@ package noten;
 
 import prozent.Prozent;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "noten")
 public class NoteModel {
+
+    @Id
+    @Column(name = "id")
+    private Long id;
+
+    @Column(name = "modulname")
     private String modulname;
+
+    @Column(name = "mt")
     private String mt;
+
+    @Column(name = "atl")
     private String atl;
+
+    @Column(name = "praesenz")
     private String praesenz;
+
+    @Column(name = "prozent")
     private String prozent;
+
+    @OneToOne(cascade = CascadeType.ALL)
     private Prozent prozentObj;
 
     public NoteModel(String modulname, String mt, String atl, String praesenz, String prozent) {
@@ -16,7 +36,6 @@ public class NoteModel {
         this.atl = atl;
         this.praesenz = praesenz;
         this.prozent = prozent;
-        this.prozentObj = prozentObj;
     }
 
     public NoteModel() {

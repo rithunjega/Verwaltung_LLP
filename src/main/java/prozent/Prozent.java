@@ -1,11 +1,33 @@
 package prozent;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "noten")
 public class Prozent {
 
-        int erreichtLLP;
-        int vonLLP;
+    @Id
+    @Column(name = "id")
+    private Long id;
 
-        public Prozent(int erreichtLLP, int vonLLP) {
+    @Column(name = "erreichtLLP")
+    int erreichtLLP;
+
+    @Column(name = "vonLLP")
+    int vonLLP;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Prozent(int erreichtLLP, int vonLLP) {
             this.erreichtLLP = erreichtLLP;
             this.vonLLP = vonLLP;
         }
