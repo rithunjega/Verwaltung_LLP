@@ -89,19 +89,8 @@ public class MainController {
         input_ErreichbarLLP.clear();
     }
 
-    private void calcProzent(NoteModel notenEntry) {
-
-        int int_totalMT = Integer.parseInt(Parser.parse(notenEntry.getMt()));
-        int int_totalATL = Integer.parseInt(Parser.parse(notenEntry.getAtl()));
-        int int_totalPraesenz = Integer.parseInt(Parser.parse(notenEntry.getPraesenz()));
-
-        notenEntry.getProzentObj().setErreichtLLP(int_totalMT + int_totalATL + int_totalPraesenz);
-
-        int erreichtProzent = notenEntry.getProzentObj().getErreichtLLP() * 100 / notenEntry.getProzentObj().getVonLLP();
-        System.out.println(erreichtProzent);
-
-        notenEntry.setProzent(notenEntry.getProzentObj().getErreichtLLP() * 100 / notenEntry.getProzentObj().getVonLLP() + "%");
-
+    public void calcProzent(NoteModel notenEntry) {
+        ProzentCalculator.calc(notenEntry);
         noten.addEntry(notenEntry);
         tableview.refresh();
     }
