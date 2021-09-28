@@ -9,28 +9,29 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Stage;
-import noten.NoteModel;
-import noten.Noten;
-import prozent.Prozent;
+import logic.ProzentCalculator;
+import model.Score;
+import model.Scores;
+import model.Percent;
 
 public class MainController {
     @FXML
     private Stage stage;
     @FXML
-    private TableView<NoteModel> tableview;
+    private TableView<Score> tableview;
     @FXML
-    private TableColumn<NoteModel, String> modulname;
+    private TableColumn<Score, String> modulname;
     @FXML
-    private TableColumn<NoteModel, String> mt;
+    private TableColumn<Score, String> mt;
     @FXML
-    private TableColumn<NoteModel, String> atl;
+    private TableColumn<Score, String> atl;
     @FXML
-    private TableColumn<NoteModel, String> praesenz;
+    private TableColumn<Score, String> presence;
     @FXML
-    private TableColumn<NoteModel, String> prozent;
+    private TableColumn<Score, String> percent;
 
     @FXML
-    private Label lbl_warning;
+    private Label lbl_Warning;
 
     @FXML
     private TextField input_Modulname;
@@ -39,99 +40,98 @@ public class MainController {
     @FXML
     private TextField input_ATL;
     @FXML
-    private TextField input_Praesenz;
+    private TextField input_Presence;
     @FXML
-    private TextField input_ErreichbarLLP;
+    private TextField input_ReachableLLP;
 
-    private Noten noten = new Noten();
+    private Scores scores = new Scores();
 
     @FXML
     private void onAdd(ActionEvent event) {
-        NoteModel noteModel = new NoteModel();
-        Prozent prozent = new Prozent();
+        Score score = new Score();
+        Percent percent = new Percent();
 
-        if (!this.input_Modulname.getText().isEmpty() && !this.input_ErreichbarLLP.getText().isEmpty()) {
-            this.lbl_warning.setText("");
+        if (!this.input_Modulname.getText().isEmpty() && !this.input_ReachableLLP.getText().isEmpty()) {
+            this.lbl_Warning.setText("");
         } else {
-            this.lbl_warning.setText("Bitte alle Pflichtfelder ausfüllen!");
+            this.lbl_Warning.setText("Bitte alle Pflichtfelder ausfüllen!");
         }
 
-        noteModel.setModulname(this.input_Modulname.getText());
+        score.setModulname(this.input_Modulname.getText());
 
         if (this.input_MT.getText().isEmpty()) {
-            noteModel.setMt("0");
+            score.setMt("0");
         } else {
-            noteModel.setMt(this.input_MT.getText());
+            score.setMt(this.input_MT.getText());
         }
 
         if (this.input_ATL.getText().isEmpty()) {
-            noteModel.setAtl("0");
+            score.setAtl("0");
         } else {
-            noteModel.setAtl(this.input_ATL.getText());
+            score.setAtl(this.input_ATL.getText());
         }
 
-        if (this.input_Praesenz.getText().isEmpty()) {
-            noteModel.setPraesenz("0");
+        if (this.input_Presence.getText().isEmpty()) {
+            score.setPresence("0");
         } else {
-            noteModel.setPraesenz(this.input_Praesenz.getText());
+            score.setPresence(this.input_Presence.getText());
         }
 
-        noteModel.setProzentObj(prozent);
-        noteModel.getProzentObj().setVonLLP(Integer.parseInt(this.input_ErreichbarLLP.getText()));
+        score.setProzentObj(percent);
+        score.getProzentObj().setReachableLLP(Integer.parseInt(this.input_ReachableLLP.getText()));
 
-        calcProzent(noteModel);
+        calcPercent(score);
 
-        tableview.getItems().add(noteModel);
+        tableview.getItems().add(score);
         input_Modulname.clear();
         input_MT.clear();
         input_ATL.clear();
-        input_Praesenz.clear();
-        input_ErreichbarLLP.clear();
+        input_Presence.clear();
+        input_ReachableLLP.clear();
     }
 
-    public void calcProzent(NoteModel notenEntry) {
+    public void calcPercent(Score notenEntry) {
         ProzentCalculator.calc(notenEntry);
-        noten.addEntry(notenEntry);
+        scores.addEntry(notenEntry);
         tableview.refresh();
     }
 
     @FXML
     private void onDelete(ActionEvent event) {
-        for (int i = 0; i < noten.getEntries().size(); i++) {
-            String modulname = noten.getEntries().get(i).getModulname();
+        for (int i = 0; i < scores.getEntries().size(); i++) {
+            String modulname = scores.getEntries().get(i).getModulname();
             if (tableview.getSelectionModel().getSelectedItem().getModulname().toString().equals(modulname)) {
-                noten.removeEntry(noten.getEntries().get(i));
+                scores.removeEntry(scores.getEntries().get(i));
             }
         }
-
         tableview.getItems().removeAll(tableview.getSelectionModel().getSelectedItems());
     }
 
     @FXML
-    private void onEditChangedModulname(TableColumn.CellEditEvent<NoteModel, String> notenStringCellEditEvent) {
-        NoteModel noteModel = tableview.getSelectionModel().getSelectedItem();
-        noteModel.setModulname(notenStringCellEditEvent.getNewValue());
+    private void onEditChangedModulname(TableColumn.CellEditEvent<Score, String> notenStringCellEditEvent) {
+        Score score = tableview.getSelectionModel().getSelectedItem();
+        score.setModulname(notenStringCellEditEvent.getNewValue());
     }
 
     @FXML
-    private void onEditChangedMT(TableColumn.CellEditEvent<NoteModel, String> notenStringCellEditEvent) {
-        NoteModel noteModel = tableview.getSelectionModel().getSelectedItem();
-        noteModel.setMt(notenStringCellEditEvent.getNewValue());
-        calcProzent(noteModel);
+    private void onEditChangedMT(TableColumn.CellEditEvent<Score, String> notenStringCellEditEvent) {
+        Score score = tableview.getSelectionModel().getSelectedItem();
+        score.setMt(notenStringCellEditEvent.getNewValue());
+        calcPercent(score);
     }
 
     @FXML
-    private void onEditChangedATL(TableColumn.CellEditEvent<NoteModel, String> notenStringCellEditEvent) {
-        NoteModel notenEntry = tableview.getSelectionModel().getSelectedItem();
+    private void onEditChangedATL(TableColumn.CellEditEvent<Score, String> notenStringCellEditEvent) {
+        Score notenEntry = tableview.getSelectionModel().getSelectedItem();
         notenEntry.setAtl(notenStringCellEditEvent.getNewValue());
-        calcProzent(notenEntry);
+        calcPercent(notenEntry);
     }
 
     @FXML
-    private void onEditChangedPraesenz(TableColumn.CellEditEvent<NoteModel, String> notenStringCellEditEvent) {
-        NoteModel notenEntry = tableview.getSelectionModel().getSelectedItem();
-        notenEntry.setPraesenz(notenStringCellEditEvent.getNewValue());
-        calcProzent(notenEntry);
+    private void onEditChangedPraesenz(TableColumn.CellEditEvent<Score, String> notenStringCellEditEvent) {
+        Score notenEntry = tableview.getSelectionModel().getSelectedItem();
+        notenEntry.setPresence(notenStringCellEditEvent.getNewValue());
+        calcPercent(notenEntry);
     }
 
     public void initialize(){
@@ -140,15 +140,15 @@ public class MainController {
         modulname.setCellFactory(TextFieldTableCell.forTableColumn());
         mt.setCellFactory(TextFieldTableCell.forTableColumn());
         atl.setCellFactory(TextFieldTableCell.forTableColumn());
-        praesenz.setCellFactory(TextFieldTableCell.forTableColumn());
+        presence.setCellFactory(TextFieldTableCell.forTableColumn());
     }
 
     private void initiateCols() {
         modulname.setCellValueFactory(new PropertyValueFactory("modulname"));
         mt.setCellValueFactory(new PropertyValueFactory("mt"));
         atl.setCellValueFactory(new PropertyValueFactory("atl"));
-        praesenz.setCellValueFactory(new PropertyValueFactory("praesenz"));
-        prozent.setCellValueFactory(new PropertyValueFactory("prozent"));
+        presence.setCellValueFactory(new PropertyValueFactory("praesenz"));
+        percent.setCellValueFactory(new PropertyValueFactory("prozent"));
     }
 
 }

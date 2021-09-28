@@ -8,11 +8,37 @@ An diese Stelle kommt die LLP-Verwaltung im Einsatz.
 ## Anleitung
 Anleitung wie deine Software gestartet, getestet und genutzt werden kann
 
+Die Applikation kann direkt von GitHub geöffnet werden. Im IntelliJ werden die benötigten Komponenten automatisch heruntergeladen.
+
 ## Komponente
 Wenn nötig und sinnvoll, beschreibe einzelne Komponenten deiner Software
 
-## Überlegungen
-Dokumentiere, was für Überlegungen du dir zu deinem Projekt gemacht hast
+Die Applikation ist in Application, Logic, Model und Test aufgeteilt. 
+
+###Application
+In der Application befindet sich die Main Klasse zum starten der Applikation.
+Ebenfalls befindet sich der MainController in diesem Verzeichnis. 
+
+###Logic
+Im Logic Package befinden sich die eigentlichen Berechnungen statt.
+
+###Model
+Im Package Model befinden sich die Objekte NoteModel und Prozent. 
+
+###Test
+Im Test Package sind jeweils JUnit Tests zu finden.
+
+#### verwendete Technologien:
+* Java JDK 16.0.2
+* Maven 4.0.0
+* JavaFX 13
+* Hibernate 4.2.8
+* MySql Connector 5.1.27
+* JUnit 4.13.2
+
+
+![img.png](pictures/img.png)
 
 ## Mehr Zeit
-Wenn du mehr Zeit gehabt hättest, was würdest du ändern bzw. verbessern?
+Wenn ich mehr Zeit gehabt hätte, würde ich das Projekt nochmals neu bauen. Ich bin mit der Architektur von meiner Applikation nicht zufrieden.
+Erst nach der Implementation habe ich versucht die Datenbank zu integrieren. Ich habe den Punkt mit JPA/Hibernate unterschätzt. Der Aufbau und die Architektur von der Applikation ist nicht gut gewählt. 

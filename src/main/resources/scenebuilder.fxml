@@ -22,19 +22,19 @@
                             <TableColumn fx:id="modulname" onEditCommit="#onEditChangedModulname" prefWidth="246.0" text="Modulname" />
                             <TableColumn fx:id="mt" onEditCommit="#onEditChangedMT" prefWidth="83.0" text="Mastery" />
                             <TableColumn fx:id="atl" onEditCommit="#onEditChangedATL" prefWidth="78.0" text="ATL" />
-                            <TableColumn fx:id="praesenz" onEditCommit="#onEditChangedPraesenz" prefWidth="117.0" text="Präsenzpunkte" />
-                            <TableColumn fx:id="prozent" prefWidth="112.0" text="Prozent" />
+                            <TableColumn fx:id="presence" onEditCommit="#onEditChangedPraesenz" prefWidth="117.0" text="Präsenzpunkte" />
+                            <TableColumn fx:id="percent" prefWidth="112.0" text="Prozent" />
                         </columns>
                     </TableView>
                     <TextField fx:id="input_Modulname" layoutX="706.0" layoutY="127.0" prefHeight="35.0" prefWidth="284.0" />
                     <TextField fx:id="input_MT" layoutX="706.0" layoutY="193.0" prefHeight="35.0" prefWidth="284.0" promptText="Mastery" />
                     <TextField fx:id="input_ATL" layoutX="706.0" layoutY="236.0" prefHeight="35.0" prefWidth="284.0" promptText="ATL" />
-                    <TextField fx:id="input_Praesenz" layoutX="706.0" layoutY="278.0" prefHeight="35.0" prefWidth="284.0" promptText="Präsenz" />
-                    <TextField fx:id="input_ErreichbarLLP" layoutX="706.0" layoutY="356.0" prefHeight="35.0" prefWidth="284.0" />
+                    <TextField fx:id="input_Presence" layoutX="706.0" layoutY="278.0" prefHeight="35.0" prefWidth="284.0" promptText="Präsenz" />
+                    <TextField fx:id="input_ReachableLLP" layoutX="706.0" layoutY="356.0" prefHeight="35.0" prefWidth="284.0" />
                     <Button layoutX="706.0" layoutY="401.0" mnemonicParsing="false" onAction="#onAdd" prefHeight="25.0" prefWidth="284.0" text="hinzufügen" />
                     <Button layoutX="706.0" layoutY="433.0" mnemonicParsing="false" onAction="#onDelete" prefHeight="25.0" prefWidth="284.0" text="löschen" />
                     <Label layoutX="706.0" layoutY="176.0" prefHeight="17.0" prefWidth="270.0" text="Bitte erreichte Anzahl LLP mit Komma eingeben" />
-                    <Label fx:id="lbl_warning" layoutX="706.0" layoutY="67.0" prefHeight="17.0" prefWidth="284.0">
+                    <Label fx:id="lbl_Warning" layoutX="706.0" layoutY="67.0" prefHeight="17.0" prefWidth="284.0">
                         <font>
                             <Font name="System Bold Italic" size="14.0" />
                         </font></Label>

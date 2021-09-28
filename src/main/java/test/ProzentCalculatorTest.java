@@ -1,31 +1,31 @@
 package test;
 
-import application.ProzentCalculator;
-import noten.NoteModel;
+import logic.ProzentCalculator;
+import model.Score;
 import org.junit.jupiter.api.Test;
-import prozent.Prozent;
+import model.Percent;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class ProzentCalculatorTest {
 
-    NoteModel noteModel = new NoteModel();
+    Score score = new Score();
 
 
     @Test
     void testProzentCalculator() {
-        noteModel.setId(1L);
-        noteModel.setModulname("PF-A");
-        noteModel.setMt("20");
-        noteModel.setAtl("20");
-        noteModel.setPraesenz("10");
+        score.setId(1L);
+        score.setModulname("PF-A");
+        score.setMt("20");
+        score.setAtl("20");
+        score.setPresence("10");
 
-        Prozent prozent = new Prozent();
-        prozent.setVonLLP(100);
+        Percent percent = new Percent();
+        percent.setReachableLLP(100);
 
-        noteModel.setProzentObj(prozent);
+        score.setProzentObj(percent);
 
-        ProzentCalculator.calc(noteModel);
-        assertEquals("50%", noteModel.getProzent());
+        ProzentCalculator.calc(score);
+        assertEquals("50%", score.getPercent());
     }
 }
