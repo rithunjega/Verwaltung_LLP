@@ -3,12 +3,13 @@ package model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "prozent")
+@Table(name = "percent")
 public class Percent {
 
     @Id
-    @Column(name = "prozent_id")
-    private Long id;
+    @GeneratedValue
+    @Column(name = "percent_id")
+    private Long percent_id;
 
     @Column(name = "reachable_LLP")
     int reachableLLP;
@@ -16,12 +17,16 @@ public class Percent {
     @Column(name = "reached_LLP")
     int reachedLLP;
 
-    public Long getId() {
-        return id;
+    @OneToOne
+    @JoinColumn(name = "score_id")
+    private Score score;
+
+    public Long getPercent_id() {
+        return percent_id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setPercent_id(Long id) {
+        this.percent_id = id;
     }
 
     public Percent(int reachedLLP, int reachableLLP) {
@@ -47,4 +52,12 @@ public class Percent {
         public void setReachableLLP(int vonLLP) {
             this.reachableLLP = vonLLP;
         }
+
+    public Score getScore() {
+        return score;
+    }
+
+    public void setScore(Score score) {
+        this.score = score;
+    }
 }

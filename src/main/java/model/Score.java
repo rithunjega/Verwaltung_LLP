@@ -7,8 +7,9 @@ import javax.persistence.*;
 public class Score {
 
     @Id
+    @GeneratedValue
     @Column(name = "score_id")
-    private Long id;
+    private Long score_id;
 
     @Column(name = "modulname")
     private String modulname;
@@ -25,12 +26,11 @@ public class Score {
     @Column(name = "percent")
     private String percent;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn
-    Percent percentObj;
+    @OneToOne(mappedBy = "score")
+    private Percent percentObj;
 
-    public Score(Long id, String modulname, String mt, String atl, String presence, String percent) {
-        this.id = id;
+    public Score(Long score_id, String modulname, String mt, String atl, String presence, String percent) {
+        this.score_id = score_id;
         this.modulname = modulname;
         this.mt = mt;
         this.atl = atl;
@@ -41,15 +41,15 @@ public class Score {
     public Score() {
     }
 
-    public Score(Long id, String modulname, String mt, String atl, String presence, String percent, Percent percentObj) {
+    public Score(Long score_id, String modulname, String mt, String atl, String presence, String percent, Percent percentObj) {
     }
 
-    public Long getId() {
-        return id;
+    public Long getScore_id() {
+        return score_id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setScore_id(Long id) {
+        this.score_id = id;
     }
 
     public String getModulname() {
@@ -80,8 +80,8 @@ public class Score {
         return presence;
     }
 
-    public void setPresence(String praesenz) {
-        this.presence = praesenz;
+    public void setPresence(String presence) {
+        this.presence = presence;
     }
 
     public String getPercent() {

@@ -1,3 +1,8 @@
+/**
+ * Hier werden die einzelnen Score in einer ArrayListe eingetragen.
+ * Diese Klasse wird nach dem Bugfix ORM nicht mehr verwendet.
+ */
+
 package model;
 
 import java.util.ArrayList;

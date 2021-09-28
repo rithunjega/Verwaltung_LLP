@@ -1,3 +1,8 @@
+/**
+ * Hier werden die CRUD Operationen durchgeführt
+ * Diese Klasse ist eine Vorbereitung für den kommenden Bugfix (ORM funktioniert nicht)
+ */
+
 package logic;
 
 import model.Score;

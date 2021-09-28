@@ -2,11 +2,15 @@ package logic;
 
 import model.Score;
 
-public class ProzentCalculator {
+public class PercentCalculator {
 
-    public ProzentCalculator() {
+    public PercentCalculator() {
     }
 
+    /**
+     * Dies ist die Hauptfunktion von der Software.
+     * Alle erreichten und möglichen LLPs werden zusammmen gerechnet und liefern den Prozentwert.
+     */
     public static Score calc(Score score) {
 
         int int_totalMT = Integer.parseInt(Parser.parse(score.getMt()));

@@ -10,7 +10,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Stage;
 import logic.JpaController;
-import logic.ProzentCalculator;
+import logic.PercentCalculator;
 import model.Score;
 import model.Scores;
 import model.Percent;
@@ -49,6 +49,11 @@ public class MainController {
     private TextField input_ReachableLLP;
 
     private Scores scores = new Scores();
+
+    /**
+     * Beim Klick auf hinzufügen werden zuerst alle Felder überprüft.
+     * Falls Pflichtfelder nicht ausgefüllt sind, wird eine Fehlermeldung ausgegeben.
+     */
 
     @FXML
     private void onAdd(ActionEvent event) {
@@ -94,20 +99,31 @@ public class MainController {
         input_ReachableLLP.clear();
     }
 
+    /**
+     * Der Prozentwert wird in der PrecentCalculator Methode aufgerufen
+     */
     public void calcPercent(Score scoreEntry) {
-        ProzentCalculator.calc(scoreEntry);
+        PercentCalculator.calc(scoreEntry);
         scores.addEntry(scoreEntry);
+
+        //Weil das ORM nicht funktioniert wurden die nächsten zwei Zeilen auskommentiert
         //JpaController.startEm();
         //JpaController.save(scoreEntry);
+
         tableview.refresh();
     }
 
+    /**
+     * Beim Läschen von einem Score Objekt wird die ArrayListe Sccores durchgesucht und das ausgewählte Objekt gelöscht
+     * Die ORM Variante ist auskommentiert aber sollte nach dem Bugfix funktionieren
+     */
     @FXML
     private void onDelete(ActionEvent event) {
         for (int i = 0; i < scores.getEntries().size(); i++) {
             String modulname = scores.getEntries().get(i).getModulname();
             if (tableview.getSelectionModel().getSelectedItem().getModulname().toString().equals(modulname)) {
                 scores.removeEntry(scores.getEntries().get(i));
+                //Weil das ORM nicht funktioniert wurden die nächsten zwei Zeilen auskommentiert
                 //JpaController.startEm();
                 //JpaController.delete(scores.getEntries().get(i));
             }
@@ -115,37 +131,53 @@ public class MainController {
         tableview.getItems().removeAll(tableview.getSelectionModel().getSelectedItems());
     }
 
+    /**
+     * Wenn der Modulname bearbeitet wird, wird das Feld geupdatet
+     */
     @FXML
-    private void onEditChangedModulname(TableColumn.CellEditEvent<Score, String> notenStringCellEditEvent) {
+    private void onEditChangedModulname(TableColumn.CellEditEvent<Score, String> scoreStringCellEditEvent) {
         Score score = tableview.getSelectionModel().getSelectedItem();
-        score.setModulname(notenStringCellEditEvent.getNewValue());
+        score.setModulname(scoreStringCellEditEvent.getNewValue());
+        //Weil das ORM nicht funktioniert wurden die nächsten zwei Zeilen auskommentiert
         //JpaController.startEm();
         //JpaController.save(score);
     }
 
+    /**
+     * Wenn die MT LLPs bearbeitet werden, wird das Feld geupdatet
+     */
     @FXML
-    private void onEditChangedMT(TableColumn.CellEditEvent<Score, String> notenStringCellEditEvent) {
+    private void onEditChangedMT(TableColumn.CellEditEvent<Score, String> scoreStringCellEditEvent) {
         Score score = tableview.getSelectionModel().getSelectedItem();
-        score.setMt(notenStringCellEditEvent.getNewValue());
+        score.setMt(scoreStringCellEditEvent.getNewValue());
         calcPercent(score);
+        //Weil das ORM nicht funktioniert wurden die nächsten zwei Zeilen auskommentiert
         //JpaController.startEm();
         //JpaController.save(score);
     }
 
+    /**
+     * Wenn die ATL LLPs bearbeitet werden, wird das Feld geupdatet
+     */
     @FXML
-    private void onEditChangedATL(TableColumn.CellEditEvent<Score, String> notenStringCellEditEvent) {
-        Score notenEntry = tableview.getSelectionModel().getSelectedItem();
-        notenEntry.setAtl(notenStringCellEditEvent.getNewValue());
-        calcPercent(notenEntry);
+    private void onEditChangedATL(TableColumn.CellEditEvent<Score, String> scoreStringCellEditEvent) {
+        Score scoreEntry = tableview.getSelectionModel().getSelectedItem();
+        scoreEntry.setAtl(scoreStringCellEditEvent.getNewValue());
+        calcPercent(scoreEntry);
+        //Weil das ORM nicht funktioniert wurden die nächsten zwei Zeilen auskommentiert
         //JpaController.startEm();
         //JpaController.save(score);
     }
 
+    /**
+     * Wenn die Praesenz LLPs bearbeitet werden, wird das Feld geupdatet
+     */
     @FXML
-    private void onEditChangedPraesenz(TableColumn.CellEditEvent<Score, String> notenStringCellEditEvent) {
-        Score notenEntry = tableview.getSelectionModel().getSelectedItem();
-        notenEntry.setPresence(notenStringCellEditEvent.getNewValue());
-        calcPercent(notenEntry);
+    private void onEditChangedPraesenz(TableColumn.CellEditEvent<Score, String> scoreStringCellEditEvent) {
+        Score scoreEntry = tableview.getSelectionModel().getSelectedItem();
+        scoreEntry.setPresence(scoreStringCellEditEvent.getNewValue());
+        calcPercent(scoreEntry);
+        //Weil das ORM nicht funktioniert wurden die nächsten zwei Zeilen auskommentiert
         //JpaController.startEm();
         //JpaController.save(score);
     }
@@ -163,8 +195,8 @@ public class MainController {
         modulname.setCellValueFactory(new PropertyValueFactory("modulname"));
         mt.setCellValueFactory(new PropertyValueFactory("mt"));
         atl.setCellValueFactory(new PropertyValueFactory("atl"));
-        presence.setCellValueFactory(new PropertyValueFactory("praesenz"));
-        percent.setCellValueFactory(new PropertyValueFactory("prozent"));
+        presence.setCellValueFactory(new PropertyValueFactory("presence"));
+        percent.setCellValueFactory(new PropertyValueFactory("percent"));
     }
 
 }

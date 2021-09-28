@@ -1,3 +1,11 @@
+/**
+ * Ein LLP-Verwaltungsprogramm welches mit Eingaben genaue Prozentwerte anzeigt
+ * Dadurch können Schüler ihre Leistungen besser beurteilen
+ *
+ * @author Rithun Jegatheeswaran
+ * @version 1.0
+ */
+
 package application;
 
 import javafx.application.Application;
