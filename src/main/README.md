@@ -21,25 +21,23 @@ Die Applikation kann direkt von GitHub geöffnet werden. Im IntelliJ werden die 
 Die Applikation ist in Application, Logic, Model und Test aufgeteilt.
 
 ### Application
-In der Application befindet sich die Main Klasse zum starten der Applikation.  
-Ebenfalls befindet sich der MainController in diesem Verzeichnis.
+In der Application befindet sich die Main Klasse, die zum Starten der Applikation dient.Zusätzlich ist der MainController zum Verknüpfen von den JavaFx Elementen in diesem Package zu finden.
+Alle Operationen werden aus dieser Klasse aus gesteuert. 
 
 ### Logic
-Im Logic Package befinden sich die eigentlichen Berechnungen statt.
+Im Logic Package befinden sich wie der Name bereits verrät die Business Logik. Im JpaController werden die CRUD Befehle ausgeführt. Der Parser sorgt für die Komma Trennungen und der PercentCalculator ist schlussendlich für die Berechnung zuständig.
 
 ### Model
-Im Package Model befinden sich die Objekte Score und Percent.
+Im Package Model befinden sich die Objekte Score und Percent. Zusätzlich ist ein Scores Objekt implementiert worden. In diesem Objekt werden alle Score Obejekte in einer ArrayListe abgespeichert. Dadurch kann man solang das Programm gestartet hat, Werte einpflegen und rauslöschen. Diese Werte bleiben aber nur im RAM. Die direkte ORM Anbindung funktioniert leider nicht.
 
 ### Test
-Im Test Package sind jeweils JUnit Tests zu finden.
+Im Test Package sind jeweils JUnit Tests zu finden. Der JpaControllerTest überprüeft die CRUD Befehle. Da die ORM Implementierung nicht funktioniert, werden die Tests immer fehlschlagen. In der ParserTest Klasse werden die Komma Trennungen und das zusammen addieren getestet. In der PercentCalculatorTest Klasse wird die Hauptfunktion von dieser Applikation überprüft. 
 
 
 ## Datenbank
-Die Datenbank wurde sehr einfach gestaltet. Es sollten die Eingegebenen Score Objekte abgespeichert werden. Ein Score Objekt steht in eine OneToOne Beziehung mit einem Precent Objekt. Im Precent Objekt werden die erreichbaren und die erreichten LLPs in Total abgespeichert. Diese Werte werden für die Berechnung vom Prozentsatz verwendet.
-![img.png](pictures/img.png)
+Die Datenbank wurde sehr einfach gestaltet. Die eingegebenen Score Objekte sollten abgespeichert werden. Ein Score Objekt steht in einer OneToOne Beziehung mit einem Precent Objekt. Im Precent Objekt werden die erreichbaren und die erreichten LLPs in Total abgespeichert. Diese Werte werden für die Berechnung vom Prozentsatz verwendet.
 
-## Mehr Zeit
-Wenn ich mehr Zeit gehabt hätte, würde ich das Projekt nochmals neu bauen. Ich bin mit der Architektur von meiner Applikation nicht zufrieden.  
-Erst nach der Implementation habe ich versucht die Datenbank zu integrieren. Dementsprechend habe ich zu Beginn die ganze Architektur nur für den RAM Speicher vorgesehen.
-Ich habe den Punkt mit JPA/Hibernate deutlich unterschätzt. Der Aufbau und die Architektur von der Applikation ist nicht gut gewählt.
-Wenn ich mehr Zeit gehabt hätte, hätte ich die ArrayList mit den Scores nicht implementiert. Diese Klasse ist für eine Software mit ORM unnötig. Die Kommunikation kann direkt über die Datenbank laufen. Leider war ich aus zeitlichen Gründen nicht mehr in der Lage das Programm richtig umzuschreiben. 
+![img.png](pictures/db_diagramm.png)
+
+## Verbesserungen
+Wenn ich mehr Zeit gehabt hätte, würde ich das Projekt nochmals neu bauen. Ich bin mit der Architektur von meiner Applikation nicht zufrieden. Erst nach der Implementation habe ich versucht die Datenbank zu integrieren. Dementsprechend habe ich zu Beginn die ganze Architektur nur für den RAM Speicher vorgesehen. Ich habe den Punkt mit JPA/Hibernate deutlich unterschätzt. Der Aufbau und die Architektur von der Applikation ist nicht gut gewählt. Wenn ich mehr Zeit gehabt hätte, hätte ich die ArrayList mit den Scores nicht implementiert. Diese Klasse ist für eine Software mit ORM unnötig. Die Kommunikation kann direkt über die Datenbank laufen. Leider war ich aus zeitlichen Gründen nicht mehr in der Lage das Programm richtig umzuschreiben. 
