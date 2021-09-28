@@ -9,12 +9,16 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Stage;
+import logic.JpaController;
 import logic.ProzentCalculator;
 import model.Score;
 import model.Scores;
 import model.Percent;
 
 public class MainController {
+
+    private JpaController jpaController;
+
     @FXML
     private Stage stage;
     @FXML
@@ -90,9 +94,11 @@ public class MainController {
         input_ReachableLLP.clear();
     }
 
-    public void calcPercent(Score notenEntry) {
-        ProzentCalculator.calc(notenEntry);
-        scores.addEntry(notenEntry);
+    public void calcPercent(Score scoreEntry) {
+        ProzentCalculator.calc(scoreEntry);
+        scores.addEntry(scoreEntry);
+        //JpaController.startEm();
+        //JpaController.save(scoreEntry);
         tableview.refresh();
     }
 
@@ -102,6 +108,8 @@ public class MainController {
             String modulname = scores.getEntries().get(i).getModulname();
             if (tableview.getSelectionModel().getSelectedItem().getModulname().toString().equals(modulname)) {
                 scores.removeEntry(scores.getEntries().get(i));
+                //JpaController.startEm();
+                //JpaController.delete(scores.getEntries().get(i));
             }
         }
         tableview.getItems().removeAll(tableview.getSelectionModel().getSelectedItems());
@@ -111,6 +119,8 @@ public class MainController {
     private void onEditChangedModulname(TableColumn.CellEditEvent<Score, String> notenStringCellEditEvent) {
         Score score = tableview.getSelectionModel().getSelectedItem();
         score.setModulname(notenStringCellEditEvent.getNewValue());
+        //JpaController.startEm();
+        //JpaController.save(score);
     }
 
     @FXML
@@ -118,6 +128,8 @@ public class MainController {
         Score score = tableview.getSelectionModel().getSelectedItem();
         score.setMt(notenStringCellEditEvent.getNewValue());
         calcPercent(score);
+        //JpaController.startEm();
+        //JpaController.save(score);
     }
 
     @FXML
@@ -125,6 +137,8 @@ public class MainController {
         Score notenEntry = tableview.getSelectionModel().getSelectedItem();
         notenEntry.setAtl(notenStringCellEditEvent.getNewValue());
         calcPercent(notenEntry);
+        //JpaController.startEm();
+        //JpaController.save(score);
     }
 
     @FXML
@@ -132,6 +146,8 @@ public class MainController {
         Score notenEntry = tableview.getSelectionModel().getSelectedItem();
         notenEntry.setPresence(notenStringCellEditEvent.getNewValue());
         calcPercent(notenEntry);
+        //JpaController.startEm();
+        //JpaController.save(score);
     }
 
     public void initialize(){
